@@ -1,5 +1,9 @@
 import moment from "moment";
 
+export const arrayToSelectDropdown = (arr, keyValue, keyLabel) => {
+  return arr.map((obj) => ({ label: obj[keyLabel], value: obj[keyValue] }));
+};
+
 export const getKeyFromValue = (array, value) => {
   return Object.keys(array).find((key) => array[key] === value);
 };

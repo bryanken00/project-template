@@ -16,8 +16,8 @@ export const useHooks = () => {
   // * useEffects
   useEffect(() => {
     form.setFieldsValue({
-      username: "faithbook",
-      password: "Aaaa1!",
+      username: null,
+      password: null,
     });
   }, [form]);
 
