@@ -1,4 +1,5 @@
 import { message } from "antd";
+import { MessageContext } from "./helper/message-context";
 import RootRoutes from "./routes";
 
 const App = () => {

@@ -4,3 +4,5 @@ export const ADDRESSTYPES = {
   CITY: "CITY",
   BRGY: "BRGY",
 };
+
+export const PROJECT_TITLE = "Project Template";

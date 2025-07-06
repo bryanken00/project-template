@@ -1,5 +1,7 @@
 import { Form } from "antd";
 import { useEffect, useState } from "react";
+import { permissions, token, userData } from "../../../constant/dummy-data";
+import { useAdminAuthStore } from "../../../store/use-auth";
 
 export const useHooks = () => {
   // * Forms
@@ -12,6 +14,7 @@ export const useHooks = () => {
   // const { isLoading, mutate } = useLoginApi();
 
   // * Store
+  const { setUserData, setPermissions, setToken } = useAdminAuthStore();
 
   // * useEffects
   useEffect(() => {
@@ -23,6 +26,9 @@ export const useHooks = () => {
 
   // * Functions
   const onFinish = (values) => {
+    setUserData(userData);
+    setPermissions(permissions);
+    setToken(token);
     // mutate(values);
   };
 
