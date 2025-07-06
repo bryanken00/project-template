@@ -33,6 +33,26 @@ export const NAVIGATIONS_ADMIN = {
           component: <Dashboard />,
           isFilter: false,
           isShow: true,
+          children: [
+            {
+              name: "Dashboard Child 1",
+              label: "Dashboard Child 1",
+              link: "dashboard-child-1",
+              icon: <DashboardIcon className="h-5 w-5" />,
+              component: <Dashboard />,
+              isFilter: false,
+              isShow: true,
+            },
+            {
+              name: "Dashboard Child 2",
+              label: "Dashboard Child 2",
+              link: "dashboard-child-2",
+              icon: <DashboardIcon className="h-5 w-5" />,
+              component: <Dashboard />,
+              isFilter: false,
+              isShow: true,
+            },
+          ],
         },
         {
           name: "Dashboard Child 2",

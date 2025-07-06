@@ -34,13 +34,15 @@ export const getItem = (label, key, icon, children, ...props) => {
   };
 };
 
-export const generateItems = (arr = []) => {
+export const generateItems = (arr = [], link = null) => {
   return arr
     .filter((obj) => obj?.isShow)
     .map((obj) => {
       const isParent = Array.isArray(obj.children) && obj.children.length > 0;
 
       const MotionLink = motion(Link);
+
+      const newLink = link ? `${link}/${obj.link}` : obj.link;
 
       const label = isParent ? (
         <motion.span
@@ -55,7 +57,7 @@ export const generateItems = (arr = []) => {
         </motion.span>
       ) : (
         <MotionLink
-          to={obj.link}
+          to={newLink}
           className="text-inherit no-underline block"
           whileHover={{
             paddingLeft: "0.5rem",
@@ -72,7 +74,7 @@ export const generateItems = (arr = []) => {
         label,
         obj.link,
         <span>{obj.icon}</span>,
-        isParent ? generateItems(obj.children) : undefined
+        isParent ? generateItems(obj.children, newLink) : undefined
       );
     });
 };

@@ -9,20 +9,40 @@ import { formatNavigations } from "../../helper/format-data";
 import Login from "../../pages/landing/login";
 import { Auth, UnAuth, ValidateRoute } from "../validate-auth";
 
+const { ADMIN } = USER_ROLES;
+
 const AdminRoutes = () => {
   const { store } = USERS.ADMIN;
-
   const navigations = formatNavigations(NAVIGATIONS_ADMIN);
+
+  const renderRoutes = (routes = [], basePath = "") =>
+    routes.map(({ name, link, component, children }) => {
+      const fullPath = `${basePath}/${link}`.replace(/\/+/g, "/");
+
+      return (
+        <Route
+          key={name}
+          element={
+            <ValidateRoute name={name} navs={navigations} redirect={ADMIN} />
+          }
+        >
+          <Route path={fullPath} element={component} />
+          {children && renderRoutes(children, fullPath)}
+        </Route>
+      );
+    });
 
   return (
     <Routes>
-      <Route path="*" element={<Navigate to={"/"} />} />
+      {/* Default fallback route */}
+      <Route path="*" element={<Navigate to="/" />} />
 
+      {/* Public (unauthenticated) routes */}
       <Route
         element={
           <UnAuth
             store={store}
-            redirect={navigations?.[0]?.link || `${USER_ROLES.ADMIN}`}
+            redirect={navigations?.[0]?.link || `/${ADMIN}`}
             checknavs={navigations}
           />
         }
@@ -30,48 +50,17 @@ const AdminRoutes = () => {
         <Route path="/" element={<Login />} />
       </Route>
 
+      {/* Protected (authenticated) routes */}
       <Route
         element={
-          <Auth
-            store={store}
-            redirect={USER_ROLES.ADMIN}
-            checknavs={navigations}
-          />
+          <Auth store={store} redirect={`/${ADMIN}`} checknavs={navigations} />
         }
       >
         <Route
           path="/"
           element={<Home navigations={navigations} store={store} />}
         >
-          {navigations.map(({ name, link, component, children }) => (
-            <Route
-              key={name}
-              element={
-                <ValidateRoute
-                  name={name}
-                  navs={navigations}
-                  redirect={USER_ROLES.ADMIN}
-                />
-              }
-            >
-              <Route key={name} path={link} element={component} />
-
-              {children &&
-                children.map(
-                  ({
-                    name: childName,
-                    link: childLink,
-                    component: childComponent,
-                  }) => (
-                    <Route
-                      key={childName}
-                      path={childLink}
-                      element={childComponent}
-                    />
-                  )
-                )}
-            </Route>
-          ))}
+          {renderRoutes(navigations)}
         </Route>
       </Route>
     </Routes>
