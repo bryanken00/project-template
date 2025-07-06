@@ -8,6 +8,11 @@ export const USER_ROLES = {
   ADMIN: "ADMIN",
 };
 
+export const USER_ROLE_PATH = {
+  USER: "user",
+  ADMIN: "admin",
+};
+
 export const USERS = {
   ADMIN: {
     name: `${getKeyFromValue(USER_ROLES, USER_ROLES.ADMIN)}`,
@@ -21,54 +26,6 @@ export const NAVIGATIONS_ADMIN = {
       name: "Dashboard",
       label: "Dashboard",
       link: "dashboard",
-      icon: <DashboardIcon className="h-6 w-6" />,
-      isFilter: true,
-      isShow: true,
-      children: [
-        {
-          name: "Dashboard Child 1",
-          label: "Dashboard Child 1",
-          link: "dashboard-child-1",
-          icon: <DashboardIcon className="h-5 w-5" />,
-          component: <Dashboard />,
-          isFilter: false,
-          isShow: true,
-          children: [
-            {
-              name: "Dashboard Child 1",
-              label: "Dashboard Child 1",
-              link: "dashboard-child-1",
-              icon: <DashboardIcon className="h-5 w-5" />,
-              component: <Dashboard />,
-              isFilter: false,
-              isShow: true,
-            },
-            {
-              name: "Dashboard Child 2",
-              label: "Dashboard Child 2",
-              link: "dashboard-child-2",
-              icon: <DashboardIcon className="h-5 w-5" />,
-              component: <Dashboard />,
-              isFilter: false,
-              isShow: true,
-            },
-          ],
-        },
-        {
-          name: "Dashboard Child 2",
-          label: "Dashboard Child 2",
-          link: "dashboard-child-2",
-          icon: <DashboardIcon className="h-5 w-5" />,
-          component: <Dashboard />,
-          isFilter: false,
-          isShow: true,
-        },
-      ],
-    },
-    {
-      name: "Dashboard 1",
-      label: "Dashboard 1",
-      link: "dashboard1",
       icon: <DashboardIcon className="h-6 w-6" />,
       component: <Dashboard />,
       isFilter: true,

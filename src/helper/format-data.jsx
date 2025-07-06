@@ -40,7 +40,7 @@ export const generateItems = (arr = [], link = null) => {
     .map((obj) => {
       const isParent = Array.isArray(obj.children) && obj.children.length > 0;
 
-      const MotionLink = motion(Link);
+      const MotionLink = motion.create(Link);
 
       const newLink = link ? `${link}/${obj.link}` : obj.link;
 
@@ -48,7 +48,6 @@ export const generateItems = (arr = [], link = null) => {
         <motion.span
           whileHover={{
             paddingLeft: "0.5rem",
-            color: "currentColor",
             scale: 1.05,
           }}
           transition={{ type: "spring", stiffness: 300 }}
@@ -61,7 +60,6 @@ export const generateItems = (arr = [], link = null) => {
           className="text-inherit no-underline block"
           whileHover={{
             paddingLeft: "0.5rem",
-            color: "currentColor",
             scale: 1.05,
           }}
           transition={{ duration: 0.3, ease: "easeInOut" }}

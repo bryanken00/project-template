@@ -8,10 +8,9 @@ import { PROJECT_TITLE } from "../../../constant/enums";
 
 const { Text } = Typography;
 const { Sider } = Layout;
-const MotionLink = motion(Link);
+const MotionLink = motion.create(Link);
 
 const TopMenus = ({ path, navigations = [], handleCollapse = () => {} }) => {
-  console.log(generateItems(navigations));
   return (
     <>
       <Menu
@@ -58,7 +57,6 @@ const Sidebar = ({ collapsed, handleCollapse, navigations, store }) => {
         className="text-inherit no-underline block"
         whileHover={{
           paddingLeft: "0.5rem",
-          color: "currentColor",
           scale: 1.05,
         }}
         transition={{ duration: 0.3, ease: "easeInOut" }}

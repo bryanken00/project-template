@@ -2,17 +2,18 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "../../components/layout/AdminLayout/Home";
 import {
   NAVIGATIONS_ADMIN,
-  USER_ROLES,
+  USER_ROLE_PATH,
   USERS,
 } from "../../constant/navigation";
 import { formatNavigations } from "../../helper/format-data";
 import Login from "../../pages/landing/login";
 import { Auth, UnAuth, ValidateRoute } from "../validate-auth";
 
-const { ADMIN } = USER_ROLES;
+const { ADMIN } = USER_ROLE_PATH;
 
 const AdminRoutes = () => {
   const { store } = USERS.ADMIN;
+  const { permissions } = store();
   const navigations = formatNavigations(NAVIGATIONS_ADMIN);
 
   const renderRoutes = (routes = [], basePath = "") =>
@@ -35,7 +36,7 @@ const AdminRoutes = () => {
   return (
     <Routes>
       {/* Default fallback route */}
-      <Route path="*" element={<Navigate to="/" />} />
+      <Route path="*" element={<Navigate to="/admin" />} />
 
       {/* Public (unauthenticated) routes */}
       <Route
