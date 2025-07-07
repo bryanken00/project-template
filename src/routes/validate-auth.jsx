@@ -11,11 +11,20 @@ export const Auth = ({ store, redirect }) => {
   );
 };
 
+const findNavByName = (navs, name) => {
+  for (const nav of navs) {
+    if (nav.name === name) return true;
+    if (nav.children && findNavByName(nav.children, name)) return true;
+  }
+  return false;
+};
+
 export const ValidateRoute = ({ name, navs = [], redirect }) => {
-  return navs.find((obj) => obj.name == name) ? (
+  const location = useLocation();
+  return findNavByName(navs, name) ? (
     <Outlet />
   ) : (
-    <Navigate to={redirect} state={{ from: location }} replace />
+    <Navigate to={redirect} state={{ from: location.pathname }} replace />
   );
 };
 
